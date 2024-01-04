@@ -2,26 +2,27 @@ package graph
 
 import "errors"
 
-type IntStack struct {
+type Stack[T any] struct {
 	Size int
-	Data []int
+	Data []T
 }
 
-func NewStack() IntStack {
-	return IntStack{
+func NewStack[T any]() *Stack[T] {
+	return &Stack[T]{
 		Size: 0,
-		Data: make([]int, 0),
+		Data: make([]T, 0),
 	}
 }
 
-func (stack *IntStack) Push(data int) {
+func (stack *Stack[T]) Push(data T) {
 	stack.Size += 1
 	stack.Data = append(stack.Data, data)
 }
 
-func (stack *IntStack) Pop() (int, error) {
+func (stack *Stack[T]) Pop() (T, error) {
 	if stack.Size == 0 {
-		return -1, errors.New("stack: size is zero")
+		var zero T
+		return zero, errors.New("stack: size is zero")
 	}
 	stack.Size -= 1
 	res := stack.Data[stack.Size]

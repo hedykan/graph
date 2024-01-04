@@ -134,7 +134,7 @@ func (graph *Graph) FindList(nodeId int) []int {
 	// 	fmt.Println(v)
 	// }
 	// 初始化栈堆，查找列表
-	stack := NewStack()
+	stack := NewStack[int]()
 	stack.Push(nodeId)
 	findNode := make([]int, 0)
 	// 开始查找
@@ -142,7 +142,7 @@ func (graph *Graph) FindList(nodeId int) []int {
 	return findNode
 }
 
-func (graph *Graph) listProc(stack IntStack, findNode []int) []int {
+func (graph *Graph) listProc(stack *Stack[int], findNode []int) []int {
 	// 获取处于栈堆顶的节点
 	nodeId, _ := stack.Pop()
 	// 如果已经找到过了，就弹出
